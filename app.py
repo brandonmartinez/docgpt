@@ -1,11 +1,15 @@
-import os
-import tempfile
-import streamlit as st
+from DocGpt import DocGPT
+from VectorDatabase import VectorDatabase
+from LlmChain import LlmChain
 from streamlit_chat import message
-from rag import DocGPT
+import os
+import streamlit as st
+import tempfile
+
+database = VectorDatabase()
+llmchain = LlmChain(database)
 
 st.set_page_config(page_title="DocGPT")
-
 
 def display_messages():
     st.subheader("Chat")
@@ -36,14 +40,14 @@ def read_and_save_file():
 
         with st.session_state["ingestion_spinner"], st.spinner(f"Ingesting {file.name}"):
             file_extension = os.path.splitext(file.name)[1]
-            st.session_state["assistant"].ingest(file_path, file_extension)
+            database.ingest(file_path, file_extension)
         os.remove(file_path)
 
 
 def page():
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        st.session_state["assistant"] = DocGPT()
+        st.session_state["assistant"] = DocGPT(llmchain)
 
     st.header("DocGPT")
 
