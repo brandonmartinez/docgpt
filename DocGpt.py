@@ -13,7 +13,7 @@ class DocGPT:
         # Configure defaults
         self.prompt = PromptTemplate.from_template(
             """
-            <s> [INST] You are an assistant for question-answering tasks based only on the provided context. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise. [/INST] </s>
+            <s> [INST] You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise. [/INST] </s>
             <context>
             {context}
             </context>
@@ -23,7 +23,7 @@ class DocGPT:
             """
         )
 
-    def ask(self, query: str):
+    def ask(self, query: str) -> str:
         output = self.chain.invoke(self.prompt, query)
 
         return output

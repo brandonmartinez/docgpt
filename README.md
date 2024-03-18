@@ -14,6 +14,9 @@ database.
   - May require `cmake` depending on OS (e.g. `apt-get install cmake` on Ubuntu,
     `brew install cmake` on macOS)
 
+## TODOS:
+- look into https://pipenv.pypa.io/en/latest/
+
 ## Credits
 
 Based off the work done by [vndee](https://github.com/vndee/local-rag-example).
