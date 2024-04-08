@@ -6,7 +6,12 @@ if [ ! -f .env ]; then
     exit 1
 fi
 
+set -eo pipefail
+set -a
+
 source .env
+
+set +a
 
 source .venv/bin/activate
 
