@@ -1,5 +1,2 @@
-# Python Configuration
-PYTHONPATH='./.env/bin/python'
-
 # Ollama Configuration
 OLLAMA_HOST='X.X.X.X:11434'

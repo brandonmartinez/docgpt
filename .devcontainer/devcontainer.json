@@ -6,7 +6,9 @@
 		"dockerfile": "Dockerfile"
 	},
 	"postCreateCommand": "bash -i ./.devcontainer/postcreate.sh",
-	"forwardPorts": [8501],
+	"forwardPorts": [
+		8501
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -23,7 +25,8 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"njqdev.vscode-python-typehint",
-				"yzhang.markdown-all-in-one"
+				"yzhang.markdown-all-in-one",
+				"streetsidesoftware.code-spell-checker"
 			]
 		}
 	}
