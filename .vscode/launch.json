@@ -2,17 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug streamlit",
+            "name": "Debug Streamlit App",
             "type": "debugpy",
             "request": "launch",
             "module": "streamlit",
             "python": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "run",
-                "app.py"
+                "src/app.py"
             ],
             "envFile": "${workspaceFolder}/.env",
-            "justMyCode": true
+            "justMyCode": true,
         }
     ]
 }

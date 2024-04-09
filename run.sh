@@ -15,4 +15,4 @@ set +a
 
 source .venv/bin/activate
 
-streamlit run app.py
+streamlit run src/app.py
