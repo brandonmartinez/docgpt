@@ -1,4 +1,3 @@
-from DocGpt import DocGPT
 from VectorDatabase import VectorDatabase
 from LlmChain import LlmChain
 from streamlit_chat import message
@@ -7,7 +6,6 @@ import streamlit as st
 import tempfile
 
 database = VectorDatabase()
-llmchain = LlmChain(database)
 
 st.set_page_config(page_title="DocGPT")
 
@@ -23,7 +21,7 @@ def process_input():
     if st.session_state["user_input"] and len(st.session_state["user_input"].strip()) > 0:
         user_text = st.session_state["user_input"].strip()
         with st.session_state["thinking_spinner"], st.spinner(f"Thinking"):
-            agent_text = st.session_state["assistant"].ask(user_text)
+            agent_text = st.session_state["assistant"].invoke(query=user_text)
 
         st.session_state["messages"].append((user_text, True))
         st.session_state["messages"].append((agent_text, False))
@@ -48,7 +46,7 @@ def read_and_save_file():
 def page():
     if len(st.session_state) == 0:
         st.session_state["messages"] = []
-        st.session_state["assistant"] = DocGPT(llmchain)
+        st.session_state["assistant"] = LlmChain(database)
 
     st.header("DocGPT")
 

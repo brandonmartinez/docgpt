@@ -1,8 +1,9 @@
+import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import TextLoader
-from langchain_community.embeddings import FastEmbedEmbeddings
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_experimental.text_splitter import SemanticChunker
 from langchain.vectorstores.utils import filter_complex_metadata
 
 # Docs for Chroma: https://api.python.langchain.com/en/latest/vectorstores/langchain_community.vectorstores.chroma.Chroma.html
@@ -14,10 +15,15 @@ class VectorDatabase:
     collection_name = "docgpt"
 
     def __init__(self):
+        host = os.getenv('OLLAMA_HOST', "localhost:11434")
+        base_url = f"http://{host}"
+        ollama_embeddings = OllamaEmbeddings(
+            base_url=base_url,
+            model="nomic-embed-text"
+        )
         self.database = Chroma(
-            embedding_function=FastEmbedEmbeddings(), persist_directory=".chromadb", collection_name=self.collection_name)
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=100, chunk_overlap=20, length_function=len, is_separator_regex=False)
+            embedding_function=ollama_embeddings, persist_directory=".chromadb", collection_name=self.collection_name)
+        self.text_splitter = SemanticChunker(ollama_embeddings)
 
     def ingest(self, file_path: str, file_extension: str):
         if file_extension == '.pdf':
