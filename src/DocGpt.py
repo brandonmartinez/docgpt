@@ -13,8 +13,9 @@ class DocGPT:
 
         promptText = """
         ### [INST]
-        Instruction: You are a textual research assistant for question-answering tasks over a set of retrieved documents.
-        Use the following context to answer the question. If you don't know the answer, just say that you don't know.
+        Instruction: You are a textual research assistant for question-answering tasks over a set of documents.
+        If you don't know the answer, just say that you don't know. Don't mention the documents, just the contents within.
+        Use the following context to answer the question:
 
         {context}
 

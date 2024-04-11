@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Creating Python virtual environment"
-python -m venv .venv
+if [ ! -d ".venv" ]; then
+    echo "Creating Python virtual environment"
+    python -m venv .venv
+fi
 
 echo "Activating Python virtual environment"
 source .venv/bin/activate

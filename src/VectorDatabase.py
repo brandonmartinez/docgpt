@@ -11,10 +11,11 @@ from langchain.vectorstores.utils import filter_complex_metadata
 class VectorDatabase:
     database = None
     text_splitter = None
+    collection_name = "docgpt"
 
     def __init__(self):
         self.database = Chroma(
-            embedding_function=FastEmbedEmbeddings(), persist_directory=".chromadb")
+            embedding_function=FastEmbedEmbeddings(), persist_directory=".chromadb", collection_name=self.collection_name)
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=100, chunk_overlap=20, length_function=len, is_separator_regex=False)
 
@@ -37,16 +38,16 @@ class VectorDatabase:
 
     def retriever(self):
         return self.database.as_retriever(
-            search_type="similarity_score_threshold",
-            search_kwargs={
-                "k": 3,
-                "score_threshold": 0.5,
-            },
+            search_type="mmr"
         )
 
-    def documents(self):
-        coll = self.database._client.get_collection("langchain")
+    def get_collection(self):
+        coll = self.database._client.get_collection(self.collection_name)
         data = coll.get()
+        return data
+
+    def documents(self):
+        data = self.get_collection()
 
         if (data is None):
             return []
@@ -59,5 +60,5 @@ class VectorDatabase:
         return documents
 
     def clear(self):
-        self.database._client.delete_collection("langchain")
+        self.database._client.delete_collection(self.collection_name)
         self.database.persist()
