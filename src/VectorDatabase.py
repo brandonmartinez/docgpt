@@ -43,3 +43,21 @@ class VectorDatabase:
                 "score_threshold": 0.5,
             },
         )
+
+    def documents(self):
+        coll = self.database._client.get_collection("langchain")
+        data = coll.get()
+
+        if (data is None):
+            return []
+
+        documents = data['documents']
+
+        if (documents is None or len(documents) == 0):
+            return []
+
+        return documents
+
+    def clear(self):
+        self.database._client.delete_collection("langchain")
+        self.database.persist()

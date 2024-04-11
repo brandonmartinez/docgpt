@@ -30,7 +30,6 @@ def process_input():
 
 
 def read_and_save_file():
-    st.session_state["assistant"].clear()
     st.session_state["messages"] = []
     st.session_state["user_input"] = ""
 
@@ -52,8 +51,9 @@ def page():
 
     st.header("DocGPT")
 
-    st.subheader("Upload a document")
-    st.file_uploader(
+    st.sidebar.header("Vector Data")
+    st.sidebar.subheader("Add file to vector database")
+    st.sidebar.file_uploader(
         "Upload document",
         type=["pdf", "txt"],
         key="file_uploader",
@@ -61,6 +61,11 @@ def page():
         label_visibility="collapsed",
         accept_multiple_files=True,
     )
+
+    st.sidebar.subheader("Data currently in vector database")
+    # st.sidebar.write(database.documents())
+    st.sidebar.dataframe(database.documents(), use_container_width=True)
+    st.sidebar.button("Clear database", on_click=database.clear)
 
     st.session_state["ingestion_spinner"] = st.empty()
 

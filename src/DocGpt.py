@@ -28,8 +28,3 @@ class DocGPT:
         output = self.chain.invoke(self.prompt, query)
 
         return output
-
-    def clear(self):
-        print("Clearing")
-        # self.db = None
-        # self.chain = None
