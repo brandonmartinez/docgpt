@@ -3,6 +3,9 @@ from langchain_community.chat_models import ChatOllama
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnablePassthrough
 from VectorDatabase import VectorDatabase
+from langchain.globals import set_verbose
+
+set_verbose(True)
 
 
 class LlmChain:

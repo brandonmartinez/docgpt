@@ -16,7 +16,7 @@ class VectorDatabase:
         self.database = Chroma(
             embedding_function=FastEmbedEmbeddings(), persist_directory=".chromadb")
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1024, chunk_overlap=100)
+            chunk_size=100, chunk_overlap=20, length_function=len, is_separator_regex=False)
 
     def ingest(self, file_path: str, file_extension: str):
         if file_extension == '.pdf':
