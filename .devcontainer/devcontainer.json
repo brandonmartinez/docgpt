@@ -26,7 +26,8 @@
 				"ms-python.vscode-pylance",
 				"njqdev.vscode-python-typehint",
 				"yzhang.markdown-all-in-one",
-				"streetsidesoftware.code-spell-checker"
+				"streetsidesoftware.code-spell-checker",
+				"ms-python.autopep8"
 			]
 		}
 	}

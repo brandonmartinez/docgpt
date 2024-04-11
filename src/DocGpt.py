@@ -2,6 +2,7 @@ from langchain.prompts import PromptTemplate
 
 from LlmChain import LlmChain
 
+
 class DocGPT:
     db = None
     chain = None
