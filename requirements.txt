@@ -28,6 +28,7 @@ gitdb==4.0.11
 GitPython==3.1.42
 google-auth==2.28.2
 googleapis-common-protos==1.63.0
+greenlet==3.0.3
 grpcio==1.62.1
 h11==0.14.0
 httptools==0.6.1
@@ -42,9 +43,10 @@ jsonpointer==2.4
 jsonschema==4.21.1
 jsonschema-specifications==2023.12.1
 kubernetes==29.0.0
-langchain==0.1.12
-langchain-community==0.0.28
-langchain-core==0.1.32
+langchain==0.1.15
+langchain-community==0.0.32
+langchain-core==0.1.41
+langchain-experimental==0.0.57
 langchain-text-splitters==0.0.1
 langsmith==0.1.27
 loguru==0.7.2
@@ -122,6 +124,7 @@ tzdata==2024.1
 urllib3==2.2.1
 uvicorn==0.28.0
 uvloop==0.19.0
+watchdog==4.0.0
 watchfiles==0.21.0
 websocket-client==1.7.0
 websockets==12.0
